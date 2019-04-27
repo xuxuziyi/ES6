@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style type="text/css">
+        .warp {
+            margin: 0 auto;
+            width: 200px;
+            height: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="warp">
+        <button type="button"> 1</button>
+        <button type="button"> 2</button>
+        <button type="button"> 3</button>
+    </div>
+   
+</body>
+<script type="text/javascript">
+    // ES5.0
+    var myName;
+    var age;
+    var person;
+    var myFunction;
+
+
+    //  变量的声明提升
+    // 用var 关键字声明的变量会提升到当前代码块的最顶端
+
+    console.log(myName);
+    var myName = "xyh";
+    var age = 16;
+    var person = {
+        name: "xyh",
+        age: 10,
+    }
+
+
+    // ES6.0语法
+    // 用`let`关键字来命名变量, 用let命名的变量不存在提升机制， 必须先声明， 再去使用.
+    // 用`let` 命名的变量。 如果遇到`{}`, 会有作用域。和函数一样。
+
+    let dog = "大黄";
+    console.log(dog);
+
+    for (let i = 0; i < 3; i++) {
+
+    }
+
+    // console.log(i); // 3, 3, 报错, undefined, 0
+
+
+    // 常量
+    // ES5.0
+
+    // function myFunction () {
+    //     var myAge = 19;
+    //     return function () {
+    //         console.log(myAge);
+    //     };
+    // };
+
+    // myFunction()();
+
+    // console.log(myAge);
+
+    // ES6.0命名常量
+    // 用关键字 `const` 关键字命名常量, 常量一旦命名赋值， 不能修改。
+    //  用关键`const`命名的引用数据类型， （对象， 数组， 函数），发生修改时不会报错， 如果是基本数据类型（String, Number， Undefined, true/false ）, 一旦修改，立即报错。
+    //  用`const`关键字命名的常量，有作用域，  
+
+    const mySex = "男";
+    // mySex = "女";
+
+    const cat = {
+        name : "加菲猫",
+        age: 1
+    };
+
+    cat.name = "波斯猫";
+    console.log(cat);
+
+
+    {
+        const myWeight = 176;
+        console.log(myWeight)
+    }
+
+    // console.log(myWeight); // 176， undefined, 176, 报错
+
+    // 函数
+    // es5
+    // 表达式命名函数
+
+    // myFunction();
+
+    var myFunction = function () {
+        console.log('我是函数');
+    }
+
+    youFunction();
+
+    //  用`function`关键字来命名函数
+    function youFunction () {
+        console.log("这是你的函数")
+    }
+
+    //  es6.0 命名函数
+    // 箭头函数
+    let yourFunction = (name) => {
+        console.log(name);
+    };
+
+    //  如果箭头函数的返回值是个表达式， 可以省略花括号
+
+    let she = (job) => job;
+
+    let result = she("前端");
+    console.log(result);
+
+
+    // es5 this关键字
+    //  全局作用域函数中的this, this指向的是window
+    function xuLe () {
+        console.log(this, "this，call");
+    }
+
+    xuLe.call(cat)
+
+    // 对象的中方法函数中的this指向的属于对象。
+    let three = {
+        name: "x",
+        age : 1,
+        getShine: function () {
+            console.log(this);
+        }
+    }
+
+    three.getShine();
+
+
+    // es6箭头函数
+    //  箭头函数用call或者apply方法调用指向 window
+
+    let banner = () => {
+        console.log(this, "箭头函数this");
+    }
+
+    banner.call(cat);
+
+    // 在对象中方法指向的window
+    let water = {
+        color: "白色",
+        size: '大的',
+        drink: () => {
+            console.log(this, "箭头函数在对象中的");
+        }
+    }
+
+    // window.water.drink();
+    
+
+    // this在构造函数中的指向window对象
+    function Book (name, age, weight) {
+        this.name = name;
+        this.age = age;
+        this.weight = weight;
+    }
+
+    Book.prototype.open = () => {
+        console.log(this, "this 在构造函数中");
+    }
+
+
+    let bookOne = new Book("道德经", 1, "厚的");
+    bookOne.open();
+
+    // 指向是wndow
+
+
+    function xyhFunction () {
+        setTimeout( () => {
+            console.log(this, "this在嵌套作用域指向的是");
+        }, 1000)
+    }
+
+    // this指向window  || this指向的是父级的函数名 || setTimeout
+
+
+    // window ||  cat
+    xyhFunction.call(cat);
+
+
+    // 类
+    // es5
+    // function Gril (faceType, height, qizhi) {
+    //     this.faceType = faceType;
+    //     this.height = height;
+    //     this.qizhi = qizhi;
+    // }
+
+    // Gril.prototype.lookMovie = function () {
+    //     console.log("今晚去看电影吧")
+    //     return this;
+    // }
+
+    // Gril.prototype.lookMarket = function () {
+    //     console.log("今晚去逛街吧");
+    //     return this;
+    // }
+
+    // let myGril = new Gril("瓜子脸", '1.65', "女王范");
+
+    // myGril.lookMarket().lookMovie();
+
+
+    //  es6.0 通过关键字`class` 来创建一个类
+    class Gril {
+        constructor (faceType, height, qizhi) {
+            this.faceType = faceType;
+            this.height = height;
+            this.qizhi = qizhi;
+        }
+
+        lookMovie () {
+            console.log("今晚去看电影吧");
+            return this;
+
+        }
+
+
+        lookMarket () {
+            console.log("今晚去逛街吧");
+            return this;
+        }
+    }
+
+
+    let myGril = new Gril("瓜子脸", '1.65', "女王范");
+
+    myGril.lookMovie().lookMarket();
+
+    class boy extends Gril{
+        constructor(name,age,faceType){
+            super(faceType);
+            this.name = name
+        }
+    }
+            let boyOne = new boy("zyh",20,"圆脸");
+            console.log(boyOne);
+            boyOne.lookMovie();
+
+
+
+
+
+
+
+
+
+
+</script>
+</html>
